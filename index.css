@@ -1,0 +1,358 @@
+:root {
+  --gap1: 4px;
+  --gap5: 64px;
+  --yellowBackground: #fceed5;
+  --yellow: #f7dba7;
+  --navy: #003459;
+  --darkNavy: #00171f;
+  --lightGray: #a3a3a3;
+  --gray: #667479;
+  --shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dongle-light {
+  font-family: "Dongle", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.dongle-regular {
+  font-family: "Dongle", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dongle-bold {
+  font-family: "Dongle", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.noto-sans-kr {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1bb;
+}
+
+.mw {
+  max-width: var(--mw);
+  width: calc(100% - var(--gap5));
+  margin: auto;
+}
+
+#sec1 {
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--yellowBackground);
+}
+
+header {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+h1 {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--yellowBackground);
+
+  font-size: 2.5rem;
+
+  /* border: 1px solid green; */
+}
+
+h1 > a {
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+
+  text-decoration: none;
+  color: var(--navy);
+
+  /* border: 1px solid green; */
+}
+
+h1 ::before {
+  content: "";
+  position: absolute;
+
+  left: -80px;
+  bottom: 40px;
+
+  z-index: -10;
+  transform: translateX(0) rotate(25deg);
+  padding: 150px 150px;
+
+  border-radius: 15%;
+  background-color: var(--yellow);
+}
+
+ul {
+  position: fixed;
+  top: 20px;
+  left: 200px;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(var(--gap1) * 8);
+}
+
+li {
+  list-style: none;
+}
+li > a {
+  font-size: 2rem;
+  white-space: nowrap;
+  text-decoration: none;
+
+  color: var(--navy);
+}
+
+#sec1 > div {
+  position: relative;
+  width: 80%;
+  height: 60vh;
+  margin: auto;
+  /* border: 2px solid blue; */
+}
+
+#sec1 h2 {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  z-index: 20;
+  transform: translateX(-50%);
+
+  font-size: 5rem;
+  line-height: 3rem;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--navy);
+
+  /* border: 1px solid green; */
+}
+
+h2 ::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: -10;
+  transform: translateX(0) rotate(-25deg);
+  padding: 20px 20px;
+
+  border-radius: 10px;
+  background-color: var(--yellow);
+}
+
+h2 ::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  z-index: -10;
+  transform: translateX(100%) rotate(45deg);
+  padding: 10px 10px;
+
+  border-radius: 5px;
+  background-color: var(--navy);
+}
+
+.img-con {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  z-index: 10;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 550px;
+
+  /* border: 3px solid red; */
+}
+
+.img-con > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-con::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+  z-index: -10;
+  transform: translateX(100%) rotate(-70deg);
+  padding: 120px 120px;
+
+  border-radius: 1rem;
+  background-color: var(--yellow);
+}
+
+.img-con::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: -20;
+  transform: translateX(0%) rotate(80deg);
+  padding: 80px 80px;
+
+  border-radius: 1rem;
+  background-color: var(--navy);
+}
+
+/* sec2 */
+
+#sec2 {
+  /* border: 2px solid red; */
+}
+#sec2 h2 {
+  padding: 1rem 0;
+  font-size: 3rem;
+  text-align: center;
+  color: var(--navy);
+}
+
+#sec2 i {
+  padding-right: 10px;
+}
+
+.fa-venus {
+  color: #fe3434;
+}
+
+.fa-mars {
+  color: #146aff;
+}
+
+.card .sexCd {
+  padding: 0 3px;
+}
+
+.list-con {
+  /* position: relative; */
+  width: 100%;
+  display: grid;
+  /* 그리드 다까먹음 */
+
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-auto-rows: minmax(100px, auto); */
+  /* grid-template-columns: repeat(auto-fill, minmax(50%, 25%)); */
+  gap: calc(var(--gap1) * 4);
+
+  /* border: 3px solid violet; */
+}
+
+@media (min-width: 768px) {
+  .list-con {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for larger screens */
+  }
+}
+
+.card {
+  position: relative;
+
+  padding: 1rem;
+
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+
+  white-space: nowrap;
+
+  /* border: 2px solid palegreen; */
+}
+
+.card > * {
+  width: 100%;
+}
+
+.card > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: transparent;
+}
+
+.card .card-img {
+  position: relative;
+
+  padding-top: 100%;
+  /* 패딩탑 주면 왜 높이 생기는건지 잘 모르겠음 */
+  border-radius: 1rem;
+  overflow: hidden;
+
+  /* border: 3px solid salmon; */
+}
+.card-img > img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap1));
+
+  padding-top: 10px;
+
+  /* padding: 1rem 0; */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+
+  /* border: 1px solid red; */
+}
+
+.kindCd {
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  /* border: 1px solid green; */
+}
+
+.card .happenDt {
+  display: flex;
+  align-items: center;
+
+  /* border: 1px solid blue; */
+}
+
+.card .noticeNo {
+  font-size: 0.9rem;
+}
+
+.card .careAddr,
+.card .noticeDt {
+  display: flex;
+  align-items: center;
+
+  color: var(--gray);
+
+  /* border: 1px solid salmon; */
+}
