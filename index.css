@@ -51,7 +51,7 @@ body {
   margin: auto;
 }
 
-#sec1 {
+#banner {
   border-radius: 20px;
   overflow: hidden;
   background-color: var(--yellowBackground);
@@ -124,7 +124,7 @@ li > a {
   color: var(--navy);
 }
 
-#sec1 > div {
+#banner > div {
   position: relative;
   width: 80%;
   height: 60vh;
@@ -132,7 +132,7 @@ li > a {
   /* border: 2px solid blue; */
 }
 
-#sec1 h2 {
+#banner h2 {
   position: absolute;
   left: 50%;
   top: 30%;
@@ -148,7 +148,7 @@ li > a {
   /* border: 1px solid green; */
 }
 
-h2 ::before {
+#banner h2 ::before {
   content: "";
   position: absolute;
   top: 0;
@@ -162,7 +162,7 @@ h2 ::before {
   background-color: var(--yellow);
 }
 
-h2 ::after {
+#banner h2 ::after {
   content: "";
   position: absolute;
   top: 0;
@@ -220,19 +220,20 @@ h2 ::after {
   background-color: var(--navy);
 }
 
-/* sec2 */
+/* sec1 */
 
-#sec2 {
+#sec1 {
   /* border: 2px solid red; */
 }
-#sec2 h2 {
+
+#sec1 h2 {
   padding: 1rem 0;
   font-size: 3rem;
   text-align: center;
   color: var(--navy);
 }
 
-#sec2 i {
+#sec1 i {
   padding-right: 10px;
 }
 
@@ -242,6 +243,10 @@ h2 ::after {
 
 .fa-mars {
   color: #146aff;
+}
+
+.fa-genderless {
+  color: rgb(147, 0, 251);
 }
 
 .card .sexCd {
@@ -271,6 +276,8 @@ h2 ::after {
 .card {
   position: relative;
 
+  width: 350px;
+
   padding: 1rem;
 
   border-radius: 1rem;
@@ -296,7 +303,6 @@ h2 ::after {
 
 .card .card-img {
   position: relative;
-
   padding-top: 100%;
   /* 패딩탑 주면 왜 높이 생기는건지 잘 모르겠음 */
   border-radius: 1rem;
@@ -313,11 +319,14 @@ h2 ::after {
 }
 
 .card-text {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  gap: calc(var(--gap1));
+  gap: calc(var(--gap1)); */
 
   padding-top: 10px;
+
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
 
   /* padding: 1rem 0; */
 }
@@ -343,16 +352,127 @@ h2 ::after {
   /* border: 1px solid blue; */
 }
 
+.card .noticeNo,
+.card .careAddr,
+.card .noticeDt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .card .noticeNo {
   font-size: 0.9rem;
 }
 
-.card .careAddr,
 .card .noticeDt {
+  color: var(--gray);
+  /* border: 1px solid salmon; */
+}
+
+/* 그리드 섹션 css부터 다시 해야함 */
+
+/* 현재는 모달창 간단한 css만 넣고, 애니메이션, 디자인은 나중에 하자 */
+
+.loader {
+  display: none;
+  padding: 1rem 0;
+  margin-bottom: 25px;
+  width: 100%;
+  height: 30px;
+  display: none;
+  justify-content: center;
+  gap: 10px;
+}
+.loader.show {
   display: flex;
+}
+.loader span {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  animation: bounce 0.4s ease-in infinite alternate;
+}
+.loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 999;
+
+  display: flex;
+  justify-content: center;
   align-items: center;
 
-  color: var(--gray);
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
 
-  /* border: 1px solid salmon; */
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+#modal-content {
+  max-width: 600px;
+  width: 100%;
+
+  background-color: var(--yellowBackground);
+
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: scale(0.8);
+}
+
+#modal.open #modal-content {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+#modal #modal-img {
+  width: 40%;
+
+  /* border: 3px solid salmon; */
+}
+#modal-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#modal-map {
+  width: 250px;
+  height: 200px;
 }
