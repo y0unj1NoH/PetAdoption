@@ -25,98 +25,104 @@
     <script src="common.js" type="module" defer></script>
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey={API키}&autoload=false&libraries=services"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9a32c47eaed2651704ecb497c1010929&autoload=false&libraries=services"
       defer
     ></script>
   </head>
   <body>
+    <header>
+      <h1 class="dongle-bold"><a href="#">데려가냥?</a></h1>
+      <nav id="gnb" class="dongle-regular">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#sec1">입양 급구</a></li>
+          <li><a href="#sec2">전체 보기</a></li>
+        </ul>
+      </nav>
+    </header>
     <section id="banner">
-      <header>
-        <h1 class="dongle-bold"><a href="/">데려가냥?</a></h1>
-        <nav id="gnb" class="dongle-regular">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Category</a></li>
-            <li><a href="#">About</a></li>
-          </ul>
-        </nav>
-      </header>
-      <div>
+      <div id="banner-content">
         <h2 class="dongle-bold">
           <span
             >One more friend <br />
             Thousands more fun!</span
           >
         </h2>
-        <div class="img-con"><img src="./src/puppyLogo.svg" alt="" /></div>
+        <div id="img-con"><img src="./src/puppyLogo.svg" alt="" /></div>
       </div>
     </section>
 
-    <section id="sec1" class="mw">
+    <section id="sec1">
       <h2 class="dongle-bold">빨리 찾아가세요!</h2>
-      <div id="list-con1" class="list-con noto-sans-kr">
-        <!-- <li class="card">
-          <div class="card-img">
-            <img
-              src="https://www.animal.go.kr/files/shelter/2024/08/202408120208454.jpg"
-              alt="프로필 이미지"
-            />
-          </div>
-          <div class="card-text">
-            <div class="card-header">
-              <span class="kindCd"
-                >시고르자브종<i class="fa-solid fa-venus sexCd"></i
-              ></span>
-              <span class="happenDt">24.08.11</span>
+      <div class="mw">
+        <ul id="list-con" class="list-con noto-sans-kr"></ul>
+        <ul id="list-con1" class="list-con noto-sans-kr">
+          <!-- <li class="card">
+            <div class="card-img">
+              <img
+                src="https://www.animal.go.kr/files/shelter/2024/08/202408120208454.jpg"
+                alt="프로필 이미지"
+              />
             </div>
-
-            <p class="noticeNo">전남-나주-2024-01003</p>
-            <p class="careAddr">
-              <i class="fa-solid fa-location-dot"></i>전라남도 나주시 산포면
-            </p>
-            <p class="noticeDt">
-              <i class="fa-regular fa-calendar"></i>2024.08.08~2024.08.08
-            </p>
-          </div>
-          <a href="#">자세히보기</a>
-        </li> -->
-      </div>
-      <div id="pagenation">
-        <!-- <button class="prev">이전</button>
-        <button class="on">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button class="next">다음</button> -->
+            <div class="card-text">
+              <div class="card-header">
+                <span class="kindCd"
+                  >시고르자브종<i class="fa-solid fa-venus sexCd"></i
+                ></span>
+                <span class="happenDt">24.08.11</span>
+              </div>
+              <p class="noticeNo">전남-나주-2024-01003</p>
+              <p class="careAddr">
+                <i class="fa-solid fa-location-dot"></i>전라남도 나주시 산포면
+              </p>
+              <p class="noticeDt">
+                <i class="fa-regular fa-calendar"></i>2024.08.08~2024.08.08
+              </p>
+            </div>
+            <a href="#">자세히보기</a>
+          </li> -->
+        </ul>
+        <div id="pagination">
+          <!-- <button class="prev">이전</button>
+          <button class="on">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
+          <button class="next">다음</button> -->
+        </div>
       </div>
     </section>
 
-    <section id="sec2" class="mw">
+    <section id="sec2">
       <h2 class="dongle-bold">많은 친구들이 엄마 아빠를 구해요!</h2>
-      <div class="search-bar">
-        <select id="sido" name="sido">
-          <option value="none">시/도 선택</option>
-        </select>
-        <select id="sigungu" name="sigungu">
-          <option value="none">시/군/구 선택</option>
-        </select>
-        <select id="up-kind" name="up-kind">
-          <option value="none">축종 선택</option>
-        </select>
-        <select id="kind" name="kind">
-          <option value="none">품종 선택</option>
-        </select>
-        <button id="search-btn">검색</button>
+      <div class="mw">
+        <div id="dropdown-menu">
+          <select id="sido" class="noto-sans-kr" name="sido">
+            <option value="none">시/도 선택</option>
+          </select>
+          <select id="sigungu" class="noto-sans-kr" name="sigungu">
+            <option value="none">시/군/구 선택</option>
+          </select>
+          <select id="up-kind" class="noto-sans-kr" name="up-kind">
+            <option value="none">축종 선택</option>
+          </select>
+          <select id="kind" class="noto-sans-kr" name="kind">
+            <option value="none">품종 선택</option>
+          </select>
+          <button id="search-btn" class="noto-sans-kr">검색</button>
+        </div>
+        <ul id="list-con2" class="list-con noto-sans-kr"></ul>
       </div>
-      <div id="list-con2" class="list-con noto-sans-kr"></div>
     </section>
 
     <section id="modal">
       <h2 hidden>자세히보기 모달창</h2>
       <div id="modal-content">
-        <button id="close-btn" class="btn">닫기</button>
+        <button id="close-btn" class="btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
 
-        <div class="modal-layout">
+        <div id="modal-layout">
           <div id="modal-img">
             모달 이미지
             <!-- <img
@@ -125,7 +131,7 @@
             /> -->
           </div>
           <div>
-            <div id="modal-text">
+            <div id="modal-text" class="noto-sans-kr">
               모달 텍스트
               <!-- <p id="modal-noticeNo">전남-나주-2024-01003</p>
               <p id="modal-kindCd">
@@ -135,7 +141,7 @@
                 <i class="fa-regular fa-calendar"></i>2024.08.08~2024.08.08
               </p> -->
             </div>
-            <table id="modal-table">
+            <table id="modal-table" class="noto-sans-kr">
               <tbody>
                 <tr>
                   <td>발견날짜</td>
