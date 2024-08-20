@@ -24,12 +24,19 @@ const $sigungu = document.getElementById("sigungu");
 const $upKind = document.getElementById("up-kind");
 const $kind = document.getElementById("kind");
 
-// SEC1, SEC2 요소
-const $listCon = document.getElementById("list-con1");
+// SEC1 요소
+const $listCon = document.getElementById("list-con");
+const $listCon1 = document.getElementById("list-con1");
+const $pagination = document.getElementById("pagination");
+
+// SEC2 요소
 const $listCon2 = document.getElementById("list-con2");
 const $searchBtn = document.getElementById("search-btn");
+
+// 모달 요소
 const $modal = document.getElementById("modal");
 const $closeBtn = document.getElementById("close-btn");
+const $modalMap = document.getElementById("modal-map");
 
 // 로딩 요소
 const $loader = document.createElement("div");
@@ -202,15 +209,12 @@ const createHtmlSec1 = card => {
   let urlToImage =
     card.popfile ||
     "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
-  let kindCd = card.kindCd || "비어있음";
+  let kindCd = card.kindCd.split("]")[1] || "비어있음";
   let sexCd =
     card.sexCd === "F"
       ? "fa-venus"
       : card.sexCd === "M" ? "fa-mars" : "fa-genderless";
-  let happenDt = card.happenDt || "비어있음";
   let noticeNo = card.noticeNo || "비어있음";
-  let careAddr = card.careAddr || "비어있음";
-  let noticeSdt = card.noticeSdt || "비어있음";
   let noticeEdt = card.noticeEdt || "비어있음";
   return `<li class="card" data-id=${card.desertionNo}>
           <div class="card-img">
@@ -219,31 +223,34 @@ const createHtmlSec1 = card => {
               alt="프로필 이미지"
             />
           </div>
-          <div class="card-text">
-            <div class="card-header">
-              <span class="kindCd"
-                >${kindCd}<i class="fa-solid ${sexCd} sexCd"></i
-              ></span>
-              <span class="happenDt">${happenDt}</span>
-            </div>
-
-            <p class="noticeNo">${noticeNo}</p>
-            <p class="careAddr">
-              <i class="fa-solid fa-location-dot"></i>${careAddr}
-            </p>
-            <p class="noticeDt">
-              <i class="fa-regular fa-calendar"></i>${noticeSdt}~${noticeEdt}
-            </p>
-          </div>
-          <a onClick="openModal('${noticeNo}')">자세히보기</a>
+          <a onClick="openModal('${noticeNo}')">자세히 보기</a>
         </li>`;
+
+  // return `<li class="card" data-id=${card.desertionNo}>
+  //         <div class="card-text">
+  //           <span class="kindCd"
+  //             >${kindCd}<i class="fa-solid ${sexCd} sexCd"></i
+  //           ></span>
+  //         <p class="noticeDt">
+  //           ~${noticeEdt}<i class="fa-solid fa-hourglass-end"></i>
+  //         </p>
+  //       </div>
+  //       <div class="card-img">
+  //         <img
+  //           src=${urlToImage}
+  //           alt="프로필 이미지"
+  //         />
+  //       </div>
+
+  //       <a onClick="openModal('${noticeNo}')">자세히 보기</a>
+  //     </li>`;
 };
 
 const createHtmlSec2 = card => {
   let urlToImage =
     card.popfile ||
     "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
-  let kindCd = card.kindCd || "비어있음";
+  let kindCd = card.kindCd.split("]")[1] || "비어있음";
   let sexCd =
     card.sexCd === "F"
       ? "fa-venus"
@@ -276,7 +283,7 @@ const createHtmlSec2 = card => {
               <i class="fa-regular fa-calendar"></i>${noticeSdt}~${noticeEdt}
             </p>
           </div>
-          <a onClick="openModal('${noticeNo}')">자세히보기</a>
+          <a onClick="openModal('${noticeNo}')">자세히 보기</a>
         </li>`;
 };
 
@@ -299,11 +306,11 @@ const pagination = () => {
 
   let paginationHtml = `<button class="next" ${pageGroup == 1
     ? "disabled"
-    : ""} onClick='movePage(${prevGroup})'>이전페이지그룹</button>`;
+    : ""} onClick='movePage(${prevGroup})'><<</button>`;
 
   paginationHtml += `<button class="next" ${pageGroup == 1
     ? "disabled"
-    : ""} onClick='movePage(${page - 1})'>이전</button>`;
+    : ""} onClick='movePage(${page - 1})'><</button>`;
 
   for (let i = firstPage; i <= lastPage; i++) {
     paginationHtml += `<button class='${i == page
@@ -313,19 +320,18 @@ const pagination = () => {
 
   paginationHtml += `<button class="next" ${pageGroup * groupSize >= totalPage
     ? "disabled"
-    : ""} onClick='movePage(${page + 1})'>다음</button>`;
+    : ""} onClick='movePage(${page + 1})'>></button>`;
 
   paginationHtml += `<button class="next" ${pageGroup * groupSize >= totalPage
     ? "disabled"
-    : ""} onClick='movePage(${nextGroup})'>다음페이지그룹</button>`;
+    : ""} onClick='movePage(${nextGroup})'>>></button>`;
 
-  document.getElementById("pagenation").innerHTML = paginationHtml;
+  $pagination.innerHTML = paginationHtml;
 };
 
-// 나중에 제대로 하면 고쳐야겠지만, 임시방편으로 만듦
-const getFormattedDateOneMonthAgo = () => {
+const getFormattedDateTenDaysAgo = () => {
   const date = new Date();
-  date.setMonth(date.getMonth() - 1); // 한 달 전으로 설정
+  date.setDate(date.getDate() - 10); // 10일 전으로 설정
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
   const day = String(date.getDate()).padStart(2, "0");
@@ -341,7 +347,7 @@ const fetchAndDisplayCards = async (type, pageNo) => {
   // 3: SEC2 스크롤 버전
 
   let endde = "none";
-  if (type === 1) endde = getFormattedDateOneMonthAgo(); // 오늘 날짜 한달전으로 해놔야할듯
+  if (type === 1) endde = getFormattedDateTenDaysAgo(); // 오늘 날짜 한달전으로 해놔야할듯
   const data = await fetchAbandonmentPublic(
     $sido.value,
     $sigungu.value,
@@ -359,7 +365,14 @@ const fetchAndDisplayCards = async (type, pageNo) => {
     case 1:
       totalResults = totalCount;
       list1Data = [...items];
-      $listCon.innerHTML = items.map(item => createHtmlSec1(item)).join("");
+      $listCon.innerHTML = items
+        .slice(0, 2)
+        .map(item => createHtmlSec1(item))
+        .join("");
+      $listCon1.innerHTML = items
+        .slice(2)
+        .map(item => createHtmlSec1(item))
+        .join("");
       pagination();
       break;
     case 2:
@@ -443,8 +456,15 @@ window.openModal = noticeNo => {
   document.getElementById("modal-chargeNm").innerText = filterData.chargeNm;
   document.getElementById("modal-officetel").innerText = filterData.officetel;
 
+  let upKindCd = filterData.kindCd.split("]")[0].slice(1);
+  let markerImgUrl =
+    upKindCd === "개"
+      ? "https://i.ibb.co/mNt1pcD/pomeranian.png"
+      : upKindCd === "고양이"
+        ? "https://i.ibb.co/LdzG4s8/munchkin.png"
+        : "https://i.ibb.co/mtv4nrw/pets.png";
+
   // 카카오맵 API 추가
-  const $modalMap = document.getElementById("modal-map"); //지도를 담을 영역의 DOM 레퍼런스
   kakao.maps.load(function() {
     let geocoder = new kakao.maps.services.Geocoder();
 
@@ -461,7 +481,7 @@ window.openModal = noticeNo => {
         let map = new kakao.maps.Map($modalMap, options); //지도 생성 및 객체 리턴
 
         let markerImage = new kakao.maps.MarkerImage(
-          "https://i.ibb.co/LdzG4s8/munchkin.png",
+          markerImgUrl,
           new kakao.maps.Size(31, 35), // 마커이미지의 크기입니다
           new kakao.maps.Point(13, 34) // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
         );
